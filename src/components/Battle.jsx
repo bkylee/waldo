@@ -1,9 +1,10 @@
-import React from 'react'
-import battle from '../images/battle.png'
+import React from 'react';
 
-const Battle = () => {
+const Battle = ({coords, getCoords}) => {
   return (
-    <div>Battle</div>
+    <>
+    <img src={require('../images/battle.png')} onClick={(e)=>getCoords(e)} alt="" />
+    </>
   )
 }
 
