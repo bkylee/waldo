@@ -56,9 +56,8 @@ const checkClick = ({coords, waldo, miss, hit, setMiss, setHit}) =>{
 
 
 const App = () => {
-  // NEED TO FIX first click is set to 0,0 
-  const [coords, setCoords] = useState(()=>{x:0, y:0});
-
+  const [coords, setCoords] = useState(()=>{});
+  console.log(coords);
   const [miss, setMiss] = useState(false);
   const [hit, setHit] = useState(false);
   
@@ -68,7 +67,6 @@ const App = () => {
   const getCoords = e =>{
     const box  = e.target.getBoundingClientRect();
     setCoords({x : e.screenX - box.left , y : e.screenY - box.right});
-    console.log(coords);
   };
 
   return (
