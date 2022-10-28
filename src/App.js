@@ -30,7 +30,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
 // Initialize Realtime Database and get a reference to the service
 
 const dbRef = ref(getDatabase());
@@ -46,10 +45,23 @@ get(child(dbRef, '/Battle/Coordinates/Waldo/')).then((snapshot)=>{
   console.error(error);
 });
 
+const checkClick = ({coords, waldo, miss, hit, setMiss, setHit}) =>{
+  if (coords[0] >= waldo.x1 && coords[0]<= waldo.x2 && coords[0] && coords[1] >= waldo.y1 && coords[1] <= waldo.y2){
+    setHit(true);
+  }else{
+    setMiss(true);
+  };
+}
+
+
+
 const App = () => {
   // NEED TO FIX first click is set to 0,0 
-  const [coords, setCoords] = useState({x:0, y:0});
+  const [coords, setCoords] = useState(()=>{x:0, y:0});
 
+  const [miss, setMiss] = useState(false);
+  const [hit, setHit] = useState(false);
+  
   // const [box, setBox] = useState({x1: 0, x2: 50, })
 
   // const waldo = {x1: 2129, y1: -1447, x2:2123, y2:-1447, x3:2129, y3:-1418, x4:2123, y4:-1418};
