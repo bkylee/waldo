@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { Routes, Route } from "react-router-dom";
 import Battle from './components/Battle';
 import Welcome from './components/Welcome';
 import NotFound from './components/NotFound';
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, child } from "firebase/database";
+import Page from './components/Page';
+import HitMiss from './components/HitMiss';
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
@@ -45,34 +47,13 @@ get(child(dbRef, '/Battle/Coordinates/Waldo/')).then((snapshot)=>{
   console.error(error);
 });
 
-const checkClick = ({coords, waldo, miss, hit, setMiss, setHit}) =>{
-  if (coords[0] >= waldo.x1 && coords[0]<= waldo.x2 && coords[0] && coords[1] >= waldo.y1 && coords[1] <= waldo.y2){
-    setHit(true);
-  }else{
-    setMiss(true);
-  };
-}
-
-
-
 const App = () => {
-  const [coords, setCoords] = useState(()=>{});
-  console.log(coords);
-  const [miss, setMiss] = useState(false);
-  const [hit, setHit] = useState(false);
-  
-  // const [box, setBox] = useState({x1: 0, x2: 50, })
-
-  // const waldo = {x1: 2129, y1: -1447, x2:2123, y2:-1447, x3:2129, y3:-1418, x4:2123, y4:-1418};
-  const getCoords = e =>{
-    const box  = e.target.getBoundingClientRect();
-    setCoords({x : e.screenX - box.left , y : e.screenY - box.right});
-  };
+  const [hit, setHit] = useState(null);
 
   return (
     <Routes>
-      <Route path='/waldo' element={<Welcome />} />
-      <Route path='/battle' element={<Battle coords={coords} getCoords={getCoords} />}/>
+      <Route path='/waldo' element={<Page/>} />  
+      <Route path='/battle' element={<Battle battleWaldo={battleWaldo} setHit={setHit}/>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
   )

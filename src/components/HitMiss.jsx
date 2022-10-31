@@ -1,23 +1,16 @@
 import React from 'react'
-import { useEffect } from 'react';
 
-const HitMiss = ({hit, miss, setHit, setMiss, done}) => {
-  let output;
-    useEffect(() => {
-    if(hit){
-        setMiss(false);
-        output = 
-        <div id='hitMiss'>You found him! <button type='button' onClick={done}>Close</button></div>
-    }else{
-        setHit(false);
-        output=
-        <div id='hitMiss'>You missed</div>
-    }
-    return () => {}
-  }, [hit, miss])
+const HitMiss = ({hit, setHit}) => {
+  const done = () =>{
+    setHit(false);
+  }
     return (
-    {output}
+    <>
+    {hit?<div id='hitMiss'>You found him! <button type='button' onClick={done}>Close</button></div>:<div id='hitMiss'>You missed</div>}
+    </>
   )
 }
 
 export default HitMiss
+
+
