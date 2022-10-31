@@ -36,28 +36,62 @@ const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
 
 const App = () => {
-  const [battle, setBattle] = useState();
   const [hit, setHit] = useState(null);
 
-  useEffect(()=>{
-    const getCoords = async () => {
-      get(child(dbRef, `users/BAtt`)).then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
-    }
-    getCoords();
-  },[]);
+  const [waldo, setWaldo] = useState();
+	const [maldo, setMaldo] = useState();
+	const [president, setPresident] = useState();
+
+	useEffect(()=>{
+		const getCoords = async () => {
+		  get(child(dbRef, `Battle/Coordinates/Waldo`)).then((snapshot) => {
+			if (snapshot.exists()) {
+				setWaldo(snapshot.val());
+        console.log(snapshot.val())
+			} else {
+			  console.log("No data available");
+			}
+		  }).catch((error) => {
+			console.error(error);
+		  });
+		}
+		getCoords();
+	  },[]);
+
+	  useEffect(()=>{
+		const getCoords = async () => {
+		  get(child(dbRef, `Battle/Coordinates/Maldo`)).then((snapshot) => {
+			if (snapshot.exists()) {
+				setMaldo(snapshot.val());
+			} else {
+			  console.log("No data available");
+			}
+		  }).catch((error) => {
+			console.error(error);
+		  });
+		}
+		getCoords();
+	  },[]);
+
+	  useEffect(()=>{
+		const getCoords = async () => {
+		  get(child(dbRef, `Battle/Coordinates/President`)).then((snapshot) => {
+			if (snapshot.exists()) {
+				setPresident(snapshot.val());
+			} else {
+			  console.log("No data available");
+			}
+		  }).catch((error) => {
+			console.error(error);
+		  });
+		}
+		getCoords();
+	  },[]);
 
   return (
     <Routes>
       <Route path='/waldo' element={<Page/>} />  
-      <Route path='/battle' element={<Battle hit={hit} dbRef={dbRef} setHit={setHit}/>} />
+      <Route path='/battle' element={<Battle hit={hit} waldo={waldo} maldo={maldo} president={president} setHit={setHit}/>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
   )

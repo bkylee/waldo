@@ -1,44 +1,36 @@
-import { get } from 'firebase/database';
 import React, {useState, useEffect} from 'react';
 import HitMiss from './HitMiss'
 
-const Battle = ({dbRef, setHit, hit}) => {
-	useEffect(()=>{
-		const getCoords = async () => {
-		  get(child(dbRef, `users/BAtt`)).then((snapshot) => {
-			if (snapshot.exists()) {
-			  console.log(snapshot.val());
-			} else {
-			  console.log("No data available");
-			}
-		  }).catch((error) => {
-			console.error(error);
-		  });
-		}
-		getCoords();
-	  },[]);
+const Battle = ({waldo, maldo, president, setHit, hit}) => {
 
-	// get coordinates for mouse click based on page, page offset, and element 
   const [coords, setCoords] = useState({x:0, y:0});
-  const getCoords = (e) =>{
+  const onClick = (e) =>{
     const box  = e.currentTarget.getBoundingClientRect();
     setCoords({x : e.pageX - window.pageXOffset -box.left , y : e.pageY - window.pageYOffset -box.top});
     console.log(coords);
-  };
+	if (coords.x >= waldo.x1 && coords.x <= waldo.x2 && coords.y >= waldo.y1 && coords.y <= waldo.y2){
+		setHit(true);
+	  }else{
+	  setHit(false);
+  	};
+	if (coords.x >= maldo.x1 && coords.x <= maldo.x2 && coords.y >= maldo.y1 && coords.y <= maldo.y2){
+		setHit(true);
+	  }else{
+	  setHit(false);
+  	};
 
-  	//check if user has found waldo 
-      useEffect(() => {
-      if (coords.x >= battle.Waldo.x1 && coords.x <= battle.Waldo.x2 && coords.y >= battle.Waldo.y1 && coords.y <= battle.Waldo.y2){
-            setHit(true);
-              }else{
-              setHit(false);
-          };
-    }, [coords]);
+	if (coords.x >= president.x1 && coords.x <= president.x2 && coords.y >= president.y1 && coords.y <= president.y2){
+		setHit(true);
+	  }else{
+	  setHit(false);
+  	};
+
+  };
     
   return (
     <>
     <HitMiss setHit={setHit} hit={hit}/>
-    <img src={require('../images/battle.png')} onClick={(e)=>getCoords(e)} alt="" />
+    <img src={require('../images/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )
 }
