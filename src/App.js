@@ -1,12 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Routes, Route } from "react-router-dom";
 import Battle from './components/Battle';
 import Welcome from './components/Welcome';
 import NotFound from './components/NotFound';
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, child } from "firebase/database";
+import { getDatabase, ref, get, child, onValue } from "firebase/database";
 import Page from './components/Page';
-import HitMiss from './components/HitMiss';
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
@@ -36,24 +35,29 @@ const app = initializeApp(firebaseConfig);
 
 const dbRef = ref(getDatabase());
 
-let battleWaldo;
-get(child(dbRef, '/Battle/Coordinates/Waldo/')).then((snapshot)=>{
-  if(snapshot.exists()){
-    battleWaldo = snapshot.val();
-    console.log(snapshot.val())
-  }
-  else{console.log('no data')};
-}).catch((error)=>{
-  console.error(error);
-});
-
 const App = () => {
+  const [battle, setBattle] = useState();
   const [hit, setHit] = useState(null);
+
+  useEffect(()=>{
+    const getCoords = async () => {
+      get(child(dbRef, `users/BAtt`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+    getCoords();
+  },[]);
 
   return (
     <Routes>
       <Route path='/waldo' element={<Page/>} />  
-      <Route path='/battle' element={<Battle battleWaldo={battleWaldo} setHit={setHit}/>} />
+      <Route path='/battle' element={<Battle hit={hit} dbRef={dbRef} setHit={setHit}/>} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
   )
