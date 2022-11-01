@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import HitMiss from './HitMiss'
+import wImage from '../images/battle/waldo.png';
+import mImage from '../images/battle/maldo.png';
+import pImage from '../images/battle/president.png';
 
 const Battle = ({waldo, maldo, president}) => {
 	const [hit, setHit] = useState(null);
@@ -29,9 +32,9 @@ const Battle = ({waldo, maldo, president}) => {
     
   return (
     <>
-	<h2>Find the President, Waldo, and Maldo</h2>
+	<h2 className='find'>Find the President <img src={pImage} alt=""/>, Waldo <img src={wImage} alt=""/>, and Maldo <img src={mImage} alt=""/> </h2>
     <HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} />
-    <img src={require('../images/battle.png')} onClick={(e)=>onClick(e)} alt="" />
+    <img src={require('../images/battle/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )
 }
