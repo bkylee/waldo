@@ -1,35 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import HitMiss from './HitMiss'
 
-const Battle = ({waldo, maldo, president, setHit, hit}) => {
+const Battle = ({waldo, maldo, president}) => {
+	const [hit, setHit] = useState(null);
+	const [pres, setPres] = useState(false);
+	const [wald, setWald] = useState(false);
+	const [mald, setMald] = useState(false);
 
   const [coords, setCoords] = useState({x:0, y:0});
+
   const onClick = (e) =>{
     const box  = e.currentTarget.getBoundingClientRect();
     setCoords({x : e.pageX - window.pageXOffset -box.left , y : e.pageY - window.pageYOffset -box.top});
     console.log(coords);
 	if (coords.x >= waldo.x1 && coords.x <= waldo.x2 && coords.y >= waldo.y1 && coords.y <= waldo.y2){
+		setWald(true);
 		setHit(true);
-	  }else{
-	  setHit(false);
-  	};
+  	}
 	if (coords.x >= maldo.x1 && coords.x <= maldo.x2 && coords.y >= maldo.y1 && coords.y <= maldo.y2){
+		setMald(true);
 		setHit(true);
-	  }else{
-	  setHit(false);
-  	};
-
+  	}
 	if (coords.x >= president.x1 && coords.x <= president.x2 && coords.y >= president.y1 && coords.y <= president.y2){
+		setPres(true);
 		setHit(true);
-	  }else{
-	  setHit(false);
   	};
-
   };
     
   return (
     <>
-    <HitMiss setHit={setHit} hit={hit}/>
+	<h2>Find the President, Waldo, and Maldo</h2>
+    <HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} />
     <img src={require('../images/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )

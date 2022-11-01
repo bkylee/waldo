@@ -1,16 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import HitPrompt from './HitPrompt';
 
-const HitMiss = ({hit, setHit}) => {
-  const done = () =>{
-    setHit(false);
-  }
-    return (
-    <>
-    {hit?<div id='hitMiss'>You found him! <button type='button' onClick={done}>Close</button></div>:<div id='hitMiss'>You missed</div>}
+const HitMiss = ({pres, mald, wald, hit, setHit}) => {
+  const [check, setCheck] = useState(0);
+  const [target, setTarget] = useState();
+  const close = ()=>{
+   setHit(false);
+  };
+  useEffect(()=>{
+    setTarget("The President")
+  },[pres]);
+
+  useEffect(()=>{
+    setTarget("Maldo")
+  },[mald]);
+
+  useEffect(()=>{
+    setTarget("Waldo")
+  },[wald]);
+
+
+  return (<>
+    {hit ? <HitPrompt name={target} close={close} /> : null}
     </>
   )
 }
-
 export default HitMiss
-
-

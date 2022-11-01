@@ -36,7 +36,6 @@ const app = initializeApp(firebaseConfig);
 const dbRef = ref(getDatabase());
 
 const App = () => {
-  const [hit, setHit] = useState(null);
 
   const [waldo, setWaldo] = useState();
 	const [maldo, setMaldo] = useState();
@@ -91,7 +90,7 @@ const App = () => {
   return (
     <Routes>
       <Route path='/waldo' element={<Page/>} />  
-      <Route path='/battle' element={<Battle hit={hit} waldo={waldo} maldo={maldo} president={president} setHit={setHit}/>} />
+      <Route path='/battle' element={<Battle waldo={waldo} maldo={maldo} president={president} />} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
   )
