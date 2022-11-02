@@ -18,10 +18,11 @@ const HitMiss = ({pres, mald, wald, hit, setHit, PA, check}) => {
     setTarget("Waldo")
   },[wald]);
 
-  return (<>
+  return (
+  <>
     {check ? <div>You win! <button type='button' onClick={PA}>Play Again</button></div> : null }
     {hit ? <HitPrompt name={target} close={close} /> : null}
-    </>
+  </>
   )
 }
 export default HitMiss

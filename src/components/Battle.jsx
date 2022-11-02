@@ -3,6 +3,7 @@ import HitMiss from './HitMiss'
 import wImage from '../images/battle/waldo.png';
 import mImage from '../images/battle/maldo.png';
 import pImage from '../images/battle/president.png';
+import { Link } from 'react-router-dom';
 
 const Battle = ({waldo, maldo, president}) => {
 	const [hit, setHit] = useState(null);
@@ -45,8 +46,11 @@ const Battle = ({waldo, maldo, president}) => {
     
   return (
     <>
-	<h2 className='find'>Find the President <img src={pImage} alt=""/>, Waldo <img src={wImage} alt=""/>, and Maldo <img src={mImage} alt=""/> </h2>
-    <HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} PA={PA} check={check} />
+	<div className='header'>	
+		<h1 className='find'>Find the President <img src={pImage} alt=""/>, Waldo <img src={wImage} alt=""/>, and Maldo <img src={mImage} alt=""/> </h1>
+		<Link to='/battle/solution'>Solution</Link>
+	</div>
+		<HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} PA={PA} check={check} />
     <img src={require('../images/battle/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )
