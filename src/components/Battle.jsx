@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import HitMiss from './HitMiss'
 import wImage from '../images/battle/waldo.png';
 import mImage from '../images/battle/maldo.png';
@@ -9,7 +9,7 @@ const Battle = ({waldo, maldo, president}) => {
 	const [pres, setPres] = useState(false);
 	const [wald, setWald] = useState(false);
 	const [mald, setMald] = useState(false);
-
+	const [check, setCheck] = useState(false);
   const [coords, setCoords] = useState({x:0, y:0});
 
   const onClick = (e) =>{
@@ -29,11 +29,24 @@ const Battle = ({waldo, maldo, president}) => {
 		setHit(true);
   	};
   };
+  
+  const PA = () =>{
+    setCheck(false);
+	setWald(false);
+	setMald(false);
+	setPres(false);
+	}
+
+	useEffect(()=>{
+		if (pres && mald && wald){
+		  setCheck(true);
+		};
+	  },[pres, mald, wald])
     
   return (
     <>
 	<h2 className='find'>Find the President <img src={pImage} alt=""/>, Waldo <img src={wImage} alt=""/>, and Maldo <img src={mImage} alt=""/> </h2>
-    <HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} />
+    <HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} PA={PA} check={check} />
     <img src={require('../images/battle/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )
