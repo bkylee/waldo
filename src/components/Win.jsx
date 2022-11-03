@@ -1,18 +1,16 @@
-import { getDatabase, ref, set} from 'firebase/database';
+import {set, ref} from 'firebase/database';
 import React, { useEffect, useState } from 'react'
 
-const Win = ({timer, PA}) => {
+const Win = ({timer, PA, db}) => {
     const [userInfo, setUserInfo] = useState();
     const [sub, setSub] = useState(true);
-    const dbRef = ref(getDatabase());
-    const createScore = () =>{
-        set(ref(dbRef, 'Battle/High Scores/' + userInfo), {
-              timer
-              });  
-        }
+    
+    const createScore = async () =>{
+        set(ref(db, `Battle/High Scores/${userInfo}`),{
+            timer 
+        })
+    }
  
-
-
   return (
     <div>
         <h1>You found everyone!</h1>

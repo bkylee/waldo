@@ -6,7 +6,7 @@ import pImage from '../images/battle/president.png';
 import Win from './Win';
 import { Link } from 'react-router-dom';
 
-const Battle = ({waldo, maldo, president}) => {
+const Battle = ({waldo, maldo, president, db}) => {
 	const [hit, setHit] = useState(null);
 	const [pres, setPres] = useState(false);
 	const [wald, setWald] = useState(false);
@@ -70,7 +70,7 @@ const Battle = ({waldo, maldo, president}) => {
 		<Link to='/battle/solution'>Solution</Link>
 	</div>
 		<HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} PA={PA} check={check} />
-		{check ?<Win timer={timer} setTimer={setTimer} setActive={setActive} setHit={setHit} PA={PA}/> : null }
+		{check ?<Win db={db}timer={timer} setTimer={setTimer} setActive={setActive} setHit={setHit} PA={PA}/> : null }
     <img src={require('../images/battle/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )

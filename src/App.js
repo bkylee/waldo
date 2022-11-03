@@ -92,7 +92,7 @@ const App = () => {
 	<Link to='/waldo' id='homeButton'><img src={him} alt='' height='auto' width='50px'/></Link>
     <Routes>
       <Route path='/waldo' element={<Page/>} />  
-      <Route path='/battle' element={<Battle waldo={waldo} maldo={maldo} president={president} />} />
+      <Route path='/battle' element={<Battle db={dbRef} waldo={waldo} maldo={maldo} president={president} />} />
 	  <Route path='/battle/solution' element={<BattleSolution />} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
