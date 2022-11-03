@@ -1,26 +1,26 @@
-import {set, ref, getDatabase, get, onValue, query} from 'firebase/database';
+import {set, ref, getDatabase, orderByChild, onValue, query, limitToFirst} from 'firebase/database';
 import React, { useState, useEffect } from 'react'
 
 
 const Win = ({timer, PA, active }) => {
     const [userInfo, setUserInfo] = useState("");
-    const [scores, setScores] = useState(null);
+    const [scores, setScores] = useState([]);
 
 
     const db= getDatabase();
-    // const db2 = query(ref(db, ))
+    const db2 = query(ref(db,`Battle/High Scores/`), orderByChild('score'), limitToFirst(5));
+
     const createScore = () =>{
-        set(ref(db, `Battle/High Scores/`), { [userInfo]:timer });
+        set(ref(db, `Battle/High Scores/${userInfo}`), { 'score':timer });
     };
 
-    const scoreRef = ref(db, 'Battle/High Scores/');
+    // const scoreRef = ref(db, 'Battle/High Scores/');
     useEffect(() => {
         const getScores = () =>{
-            onValue(scoreRef, (snapshot)=>{
-                const data = snapshot.val();
-                setScores(data);
-            });
-        };
+            onValue(db2, (snapshot)=>{
+                setScores(snapshot.val());
+                });
+            };
         if(active === false){getScores(); console.log(scores)}
     }, [active]);
 
