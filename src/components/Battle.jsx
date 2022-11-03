@@ -66,11 +66,11 @@ const Battle = ({waldo, maldo, president, db}) => {
     <>
 	<div className='header'>	
 		<h1 className='find'>Find the President <img src={pImage} alt=""/>, Waldo <img src={wImage} alt=""/>, and Maldo <img src={mImage} alt=""/> </h1>
-		<h2 className='timer'>{timer}</h2>
+		<h2 className='timer'>Time: {timer}</h2>
 		<Link to='/battle/solution'>Solution</Link>
 	</div>
 		<HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} PA={PA} check={check} />
-		{check ?<Win db={db}timer={timer} setTimer={setTimer} setActive={setActive} setHit={setHit} PA={PA}/> : null }
+		{check ?<Win db={db} timer={timer} setTimer={setTimer} setActive={setActive} setHit={setHit} PA={PA}/> : null }
     <img src={require('../images/battle/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )

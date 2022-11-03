@@ -1,13 +1,13 @@
 import {set, ref} from 'firebase/database';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 const Win = ({timer, PA, db}) => {
-    const [userInfo, setUserInfo] = useState();
+    const [userInfo, setUserInfo] = useState("");
     const [sub, setSub] = useState(true);
     
-    const createScore = async () =>{
-        set(ref(db, `Battle/High Scores/${userInfo}`),{
-            timer 
+    const createScore = () =>{
+        set(ref(db, `Battle/High Scores/` + userInfo),{
+            time: timer
         })
     }
  
@@ -16,9 +16,11 @@ const Win = ({timer, PA, db}) => {
         <h1>You found everyone!</h1>
         <div>
             <h1>Your time was {timer}</h1>
-            <label htmlFor='name'>Name</label>
-            <input type='text' id='name' /> 
-            <button type='button' onChange={(e)=>{setUserInfo(e.target.value)}} onClick={createScore}>Submit</button>
+            <form>
+                <label htmlFor='name' >Name
+                <input type='text' id='name' value={userInfo} onChange={(e)=>{setUserInfo(e.target.value)}}/> </label>
+                <button type='button' onClick={createScore}>Submit</button>
+            </form>
         </div>
         <div id='scores'>    
             <h1>High Scores</h1>
