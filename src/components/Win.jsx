@@ -1,16 +1,17 @@
-import {set, ref} from 'firebase/database';
+import {set, ref, getDatabase} from 'firebase/database';
 import React, { useState } from 'react'
 
-const Win = ({timer, PA, db}) => {
+
+const Win = ({timer, PA }) => {
     const [userInfo, setUserInfo] = useState("");
     const [sub, setSub] = useState(true);
     
+    const db= getDatabase();
     const createScore = () =>{
-        set(ref(db, `Battle/High Scores/` + userInfo),{
-            time: timer
-        })
-    }
- 
+        set(ref(db, `Battle/High Scores/${userInfo}`), { timer });
+    };
+
+
   return (
     <div>
         <h1>You found everyone!</h1>
@@ -24,7 +25,7 @@ const Win = ({timer, PA, db}) => {
         </div>
         <div id='scores'>    
             <h1>High Scores</h1>
-            {/* scores */}
+            {}
         </div>
         <button type='button' onClick={PA}>Play Again</button>
         
