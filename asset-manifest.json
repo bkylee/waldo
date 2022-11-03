@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.f4277b1b.css",
-    "main.js": "/react-gh-pages/static/js/main.9353c546.js",
-    "static/media/waldoSolution.png": "/react-gh-pages/static/media/waldoSolution.fb98376938e35ade3643.png",
-    "static/media/battle.png": "/react-gh-pages/static/media/battle.06972bf50baca0816f94.png",
-    "static/media/him.png": "/react-gh-pages/static/media/him.883ebd835a26d8958b9b.png",
-    "index.html": "/react-gh-pages/index.html",
-    "main.f4277b1b.css.map": "/react-gh-pages/static/css/main.f4277b1b.css.map",
-    "main.9353c546.js.map": "/react-gh-pages/static/js/main.9353c546.js.map"
+    "main.css": "/waldo/static/css/main.f4277b1b.css",
+    "main.js": "/waldo/static/js/main.81040504.js",
+    "static/media/waldoSolution.png": "/waldo/static/media/waldoSolution.fb98376938e35ade3643.png",
+    "static/media/battle.png": "/waldo/static/media/battle.06972bf50baca0816f94.png",
+    "static/media/him.png": "/waldo/static/media/him.883ebd835a26d8958b9b.png",
+    "index.html": "/waldo/index.html",
+    "main.f4277b1b.css.map": "/waldo/static/css/main.f4277b1b.css.map",
+    "main.81040504.js.map": "/waldo/static/js/main.81040504.js.map"
   },
   "entrypoints": [
     "static/css/main.f4277b1b.css",
-    "static/js/main.9353c546.js"
+    "static/js/main.81040504.js"
   ]
 }
