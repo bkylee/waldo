@@ -4,26 +4,31 @@ import React, { useState, useEffect } from 'react'
 
 const Win = ({timer, PA, active }) => {
     const [userInfo, setUserInfo] = useState("");
-    const [scores, setScores] = useState([]);
-
+    const [scores, setScores] = useState(null);
+    const [output, setOutput] = useState(null);
 
     const db= getDatabase();
-    const db2 = query(ref(db,`Battle/High Scores/`), orderByChild('score'), limitToFirst(5));
 
     const createScore = () =>{
         set(ref(db, `Battle/High Scores/${userInfo}`), { 'score':timer });
     };
 
+    const db2 = query(ref(db,`Battle/High Scores/`), orderByChild('score'), limitToFirst(5));
+    const getScores = () =>{
+        onValue(db2, (snapshot)=>{
+            setScores(snapshot.val());
+            });
+        };
+
     // const scoreRef = ref(db, 'Battle/High Scores/');
     useEffect(() => {
-        const getScores = () =>{
-            onValue(db2, (snapshot)=>{
-                setScores(snapshot.val());
-                });
-            };
-        if(active === false){getScores(); console.log(scores)}
+        getScores(); 
     }, [active]);
 
+    useEffect(()=>{scores.map(score=>{return(
+        <div>{score}</div>
+    )})
+},[scores])
   return (
     <div>
         <h1>You found everyone!</h1>
@@ -37,7 +42,7 @@ const Win = ({timer, PA, active }) => {
         </div>
         <div id='scores'>    
             <h1>High Scores</h1>
-            {}
+            {output}
         </div>
         <button type='button' onClick={PA}>Play Again</button>
         
