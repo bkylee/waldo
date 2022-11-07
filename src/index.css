@@ -2,6 +2,22 @@
 
 :root{
     box-sizing: border-box;
+    font-size: 18px;
+}
+button{
+    background-color:transparent;
+    border-radius: 5px;
+    border: solid white 2px;
+    font-weight: bold;
+    color: white;
+}
+
+input{
+    border-radius: 3px;
+    border: white solid 2px;
+    background-color: red;
+    color: white;
+    
 }
 
 #homepage{
@@ -48,6 +64,23 @@ body{
 }
 
 #hitMiss{
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 130px;
+    left: 45%;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+#win{
+    position: fixed;
+    top: 130px;
+    left: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    background-color: rgba(255, 0, 0, 1);
+    border: dotted white 4px;
 }

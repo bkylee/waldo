@@ -6,7 +6,7 @@ import pImage from '../images/battle/president.png';
 import Win from './Win';
 import { Link } from 'react-router-dom';
 
-const Battle = ({waldo, maldo, president}) => {
+const Battle = ({fetchedCoords}) => {
 	const [hit, setHit] = useState(null);
 	const [pres, setPres] = useState(false);
 	const [wald, setWald] = useState(false);
@@ -20,15 +20,15 @@ const Battle = ({waldo, maldo, president}) => {
     const box  = e.currentTarget.getBoundingClientRect();
     setCoords({x : e.pageX - window.pageXOffset -box.left , y : e.pageY - window.pageYOffset -box.top});
 	console.log(coords);
-	if (coords.x >= waldo.x1 && coords.x <= waldo.x2 && coords.y >= waldo.y1 && coords.y <= waldo.y2){
+	if (coords.x >= fetchedCoords.waldo.x1 && coords.x <= fetchedCoords.waldo.x2 && coords.y >= fetchedCoords.waldo.y1 && coords.y <= fetchedCoords.waldo.y2){
 		setWald(true);
 		setHit(true);
   	}
-	if (coords.x >= maldo.x1 && coords.x <= maldo.x2 && coords.y >= maldo.y1 && coords.y <= maldo.y2){
+	if (coords.x >= fetchedCoords.maldo.x1 && coords.x <= fetchedCoords.maldo.x2 && coords.y >= fetchedCoords.maldo.y1 && coords.y <= fetchedCoords.maldo.y2){
 		setMald(true);
 		setHit(true);
   	}
-	if (coords.x >= president.x1 && coords.x <= president.x2 && coords.y >= president.y1 && coords.y <= president.y2){
+	if (coords.x >= fetchedCoords.president.x1 && coords.x <= fetchedCoords.president.x2 && coords.y >= fetchedCoords.president.y1 && coords.y <= fetchedCoords.president.y2){
 		setPres(true);
 		setHit(true);
   	};
@@ -67,11 +67,11 @@ const Battle = ({waldo, maldo, president}) => {
     <>
 	<div className='header'>	
 		<h1 className='find'>Find the President <img src={pImage} alt=""/>, Waldo <img src={wImage} alt=""/>, and Maldo <img src={mImage} alt=""/> </h1>
-		<h2 className='timer'>Time: {timer}</h2>
 		<Link to='/battle/solution'>Solution</Link>
+		<h2 className='timer'>Time: {timer}</h2>
 	</div>
 		<HitMiss pres={pres} wald={wald} mald={mald} coords={coords} hit={hit} setHit={setHit} PA={PA} check={check} />
-		{check ?<Win db={db} active={active} timer={timer} setTimer={setTimer} setActive={setActive} setHit={setHit} PA={PA}/> : null }
+		{check ?<Win active={active} timer={timer} setTimer={setTimer} setActive={setActive} setHit={setHit} PA={PA}/> : null }
     <img src={require('../images/battle/battle.png')} onClick={(e)=>onClick(e)} alt="" />
     </>
   )

@@ -24,12 +24,12 @@ const Win = ({timer, PA }) => {
 
     
   return (
-    <div>
+    <div id="win">
         <h1>You found everyone!</h1>
         <div>
             <h1>Your time was {timer}</h1>
             <form>
-                <label htmlFor='name' >Name</label>
+                <label htmlFor='name' >Name: </label>
                 <input type='text' id='name' value={userInfo} onChange={(e)=>{setUserInfo(e.target.value)}}/> 
                 <button type='button' onClick={onClick} >Submit</button>
             </form>
@@ -39,7 +39,7 @@ const Win = ({timer, PA }) => {
             {
                 scores.map(score=>{
                     return(
-                        <div key={uniqid()}>{score.name}:{score.score}</div>
+                        <div key={uniqid()}>{score.name}: {score.score}</div>
                     )
                 })
             }

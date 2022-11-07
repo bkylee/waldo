@@ -6,7 +6,7 @@ import { initializeApp } from "firebase/app";
 import Page from './components/Page';
 import BattleSolution from './components/BattleSolution';
 import him from './images/him.png'
-import { getFirestore, getDoc } from "firebase/firestore"; 
+import { getFirestore, getDoc, doc } from "firebase/firestore"; 
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -31,33 +31,22 @@ export const db = getFirestore(app);
 
 const App = () => {
 
- 	const [waldo, setWaldo] = useState();
-	const [maldo, setMaldo] = useState();
-	const [president, setPresident] = useState();
+ 	const [coords, setCoords] = useState(null);
 
-	const fetchW = async () => {
-		const data = await getDoc(db, "Battle", "Waldo");
-		setWaldo(data.data())
+	const coordRef = doc(db, "Battle", "Coordinates")
+
+	const fetchcoordinates = async () => {
+		const data = await getDoc(coordRef);
+		setCoords(data.data())
 	  };
-	  fetchW();
 	
-	  const fetchM = async () => {
-		const data = await getDoc(db, "Battle", "Maldo");
-		setMaldo(data.data());
-	  }
-	  fetchM();
-	
-	  const fetchP = async () => {
-		const data = await getDoc(db, "Battle", "President");
-		setPresident(data.data())
-	  };
-	  fetchP();
+	  fetchcoordinates();
 
   return (<>
 	<Link to='/waldo' id='homeButton'><img src={him} alt='' height='auto' width='50px'/></Link>
     <Routes>
       <Route path='/waldo' element={<Page/>} />  
-      <Route path='/battle' element={<Battle db={db} waldo={waldo} maldo={maldo} president={president} />} />
+      <Route path='/battle' element={<Battle fetchedCoords={coords} />} />
 	  <Route path='/battle/solution' element={<BattleSolution />} />
       <Route path='*' element={<NotFound/>} />
     </Routes>
