@@ -29,8 +29,8 @@ const Win = ({timer, PA }) => {
         <div>
             <h1>Your time was {timer}</h1>
             <form>
-                <label htmlFor='name' >Name
-                <input type='text' id='name' value={userInfo} onChange={(e)=>{setUserInfo(e.target.value)}}/> </label>
+                <label htmlFor='name' >Name</label>
+                <input type='text' id='name' value={userInfo} onChange={(e)=>{setUserInfo(e.target.value)}}/> 
                 <button type='button' onClick={onClick} >Submit</button>
             </form>
         </div>

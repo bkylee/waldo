@@ -6,7 +6,8 @@ import { initializeApp } from "firebase/app";
 import Page from './components/Page';
 import BattleSolution from './components/BattleSolution';
 import him from './images/him.png'
-import { getFirestore } from "firebase/firestore"; 
+import { getFirestore, getDoc } from "firebase/firestore"; 
+
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
@@ -30,10 +31,27 @@ export const db = getFirestore(app);
 
 const App = () => {
 
-  const [waldo, setWaldo] = useState();
+ 	const [waldo, setWaldo] = useState();
 	const [maldo, setMaldo] = useState();
 	const [president, setPresident] = useState();
 
+	const fetchW = async () => {
+		const data = await getDoc(db, "Battle", "Waldo");
+		setWaldo(data.data())
+	  };
+	  fetchW();
+	
+	  const fetchM = async () => {
+		const data = await getDoc(db, "Battle", "Maldo");
+		setMaldo(data.data());
+	  }
+	  fetchM();
+	
+	  const fetchP = async () => {
+		const data = await getDoc(db, "Battle", "President");
+		setPresident(data.data())
+	  };
+	  fetchP();
 
   return (<>
 	<Link to='/waldo' id='homeButton'><img src={him} alt='' height='auto' width='50px'/></Link>

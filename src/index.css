@@ -47,3 +47,7 @@ body{
     margin-top: 0px;
 }
 
+#hitMiss{
+    position: sticky;
+    top: 0;
+}

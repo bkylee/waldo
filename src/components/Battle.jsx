@@ -6,7 +6,7 @@ import pImage from '../images/battle/president.png';
 import Win from './Win';
 import { Link } from 'react-router-dom';
 
-const Battle = ({waldo, maldo, president, db}) => {
+const Battle = ({waldo, maldo, president}) => {
 	const [hit, setHit] = useState(null);
 	const [pres, setPres] = useState(false);
 	const [wald, setWald] = useState(false);
@@ -20,18 +20,18 @@ const Battle = ({waldo, maldo, president, db}) => {
     const box  = e.currentTarget.getBoundingClientRect();
     setCoords({x : e.pageX - window.pageXOffset -box.left , y : e.pageY - window.pageYOffset -box.top});
 	console.log(coords);
-	// if (coords.x >= waldo.x1 && coords.x <= waldo.x2 && coords.y >= waldo.y1 && coords.y <= waldo.y2){
-	// 	setWald(true);
-	// 	setHit(true);
-  	// }
-	// if (coords.x >= maldo.x1 && coords.x <= maldo.x2 && coords.y >= maldo.y1 && coords.y <= maldo.y2){
-	// 	setMald(true);
-	// 	setHit(true);
-  	// }
-	// if (coords.x >= president.x1 && coords.x <= president.x2 && coords.y >= president.y1 && coords.y <= president.y2){
-	// 	setPres(true);
-	// 	setHit(true);
-  	// };
+	if (coords.x >= waldo.x1 && coords.x <= waldo.x2 && coords.y >= waldo.y1 && coords.y <= waldo.y2){
+		setWald(true);
+		setHit(true);
+  	}
+	if (coords.x >= maldo.x1 && coords.x <= maldo.x2 && coords.y >= maldo.y1 && coords.y <= maldo.y2){
+		setMald(true);
+		setHit(true);
+  	}
+	if (coords.x >= president.x1 && coords.x <= president.x2 && coords.y >= president.y1 && coords.y <= president.y2){
+		setPres(true);
+		setHit(true);
+  	};
   };
   
   useEffect(()=>{
